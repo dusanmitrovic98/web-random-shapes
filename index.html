@@ -22,3 +22,82 @@
             border-radius: 50%;
         }
 
+        .square {
+            border-radius: 0%;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 87px solid rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes bubble {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const numberOfShapes = 20;
+
+        for (let i = 0; i < numberOfShapes; i++) {
+            createRandomElement();
+        }
+
+        function createRandomElement() {
+            const randomShape = Math.random() < 0.33 ? createCircle() : Math.random() < 0.67 ? createSquare() : createTriangle();
+
+            const size = Math.random() * 100 + 50; // Random size between 50 and 150 pixels
+            const opacity = Math.random() * 0.6 + 0.2; // Random opacity between 0.2 and 0.8
+
+            randomShape.style.width = `${size}px`;
+            randomShape.style.height = `${size}px`;
+            randomShape.style.opacity = opacity;
+
+            const x = Math.random() * (window.innerWidth - size);
+            const y = Math.random() * (window.innerHeight - size);
+
+            randomShape.style.left = `${x}px`;
+            randomShape.style.top = `${y}px`;
+
+            document.body.appendChild(randomShape);
+        }
+
+        function createCircle() {
+            const circle = document.createElement('div');
+            circle.classList.add('shape', 'circle');
+            return circle;
+        }
+
+        function createSquare() {
+            const square = document.createElement('div');
+            square.classList.add('shape', 'square');
+            return square;
+        }
+
+        function createTriangle() {
+            const triangle = document.createElement('div');
+            triangle.classList.add('shape', 'triangle');
+            return triangle;
+        }
+    </script>
+</body>
+
+</html>
